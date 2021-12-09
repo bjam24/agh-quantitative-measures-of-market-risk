@@ -1,0 +1,498 @@
+---
+title: "Zajecia1"
+author: "Bartlomiej Jamiolkowski"
+date: "7 12 2021"
+output: html_document
+---
+
+# Zadanie 1
+
+```{r message=FALSE, warning=FALSE}
+library(SciViews)
+library(ggplot2)
+library(dplyr)
+library(hrbrthemes)
+```
+
+```{r}
+kgh_d_2009 <- read.csv("kgh_d_2009.csv", header = TRUE)
+kgh_d_2012 <- read.csv("kgh_d_2012.csv", header = TRUE)
+kgh_d_2020 <- read.csv("kgh_d_2020.csv", header = TRUE)
+kgh_m_2009 <- read.csv("kgh_m_2009.csv", header = TRUE)
+kgh_w_2012 <- read.csv("kgh_w_2012.csv", header = TRUE)
+kgh_w_2020 <- read.csv("kgh_w_2020.csv", header = TRUE)
+```
+
+## Wykresy notowań spółki KGHM (kursy zamknięcia)
+### Dane dzienne z lat 2012 - 2013
+```{r}
+ggplot(data = kgh_d_2012, aes(x = as.Date(Data), y = Zamkniecie)) + 
+  geom_line(color = "blue", size = 1) +
+  ggtitle("Daily closing price for KGHM (2012 - 2013)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Time", y = "Adjusted close") 
+```
+
+```{r}
+# Simple daily rate return 2012 - 2013
+close_d_2012 <- kgh_d_2012$Zamkniecie
+rate_of_return_d_2012_s <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_d_2012_s[i] = 100 * (close_d_2012[i + 1] - close_d_2012[i])/close_d_2012[i]
+}
+# Logarithmic daily rate return 2012 - 2013
+close_d_2012 <- kgh_d_2012$Zamkniecie
+rate_of_return_d_2012_l <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_d_2012_l[i] = 100 * log(close_d_2012[i + 1]/close_d_2012[i])
+}
+```
+
+
+### Dane tygodniowe dla lat 2012 - 2013
+```{r}
+ggplot(data = kgh_w_2012, aes(x = as.Date(Data), y = Zamkniecie)) + 
+  geom_line(color = "blue", size = 1) +
+  ggtitle("Weekly closing price for KGHM (2012 - 2013)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Time", y = "Adjusted close") 
+```
+
+```{r}
+# Simple daily rate return 2012 - 2013
+close_w_2012 <- kgh_w_2012$Zamkniecie
+rate_of_return_w_2012_s <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_w_2012_s[i] = 100 * (close_w_2012[i + 1] - close_w_2012[i])/close_w_2012[i]
+}
+# Logarithmic daily rate return 2012 - 2013
+close_w_2012 <- kgh_w_2012$Zamkniecie
+rate_of_return_w_2012_l <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_w_2012_l[i] = 100 * log(close_w_2012[i + 1]/close_w_2012[i])
+}
+```
+
+
+### Dane dzienne z lat 2020 - 2021
+```{r}
+ggplot(data = kgh_d_2020, aes(x = as.Date(Data), y = Zamkniecie)) + 
+  geom_line(color = "blue", size = 1) +
+  ggtitle("Daily closing price for KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Time", y = "Adjusted close") 
+```
+
+```{r}
+# Simple daily rate return 2020 - 2021
+close_d_2020 <- kgh_d_2020$Zamkniecie
+rate_of_return_d_2020_s <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_d_2020_s[i] = 100 * (close_d_2020[i + 1] - close_d_2020[i])/close_d_2020[i]
+}
+
+# Logarithmic daily rate return 2020 - 2021
+close_d_2020 <- kgh_d_2020$Zamkniecie
+rate_of_return_d_2020_l <- rep(0, 483)
+for(i in 1:483){
+  rate_of_return_d_2020_l[i] = 100 * log(close_d_2020[i + 1] / close_d_2020[i])
+}
+```
+
+
+### Dane tygodniowe dla lat 2020 - 2021
+```{r}
+ggplot(data = kgh_w_2020, aes(x = as.Date(Data), y = Zamkniecie)) + 
+  geom_line(color = "blue", size = 1) +
+  ggtitle("Weekly closing price for KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Time", y = "Adjusted close") 
+```
+
+```{r}
+# Simple weekly rate return 2020 - 2021
+close_w_2020 <- kgh_w_2020$Zamkniecie
+rate_of_return_w_2020_s <- rep(0, 100)
+for(i in 1:100){
+  rate_of_return_w_2020_s[i] = 100 * (close_w_2020[i + 1] - close_w_2020[i])/close_w_2020[i]
+}
+
+# Logarithmic weekly rate return 2020 - 2021
+close_w_2020 <- kgh_w_2020$Zamkniecie
+rate_of_return_w_2020_l <- rep(0, 100)
+for(i in 1:100){
+  rate_of_return_w_2020_l[i] = 100 * log(close_w_2020[i + 1] / close_w_2020[i])
+}
+```
+
+
+### Dane miesięczne z lat 2009 - 2021
+```{r}
+ggplot(data = kgh_m_2009, aes(x = as.Date(Data), y = Zamkniecie)) + 
+  geom_line(color = "blue", size = 1) +
+  ggtitle("Monthly closing price for KGHM (2009 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "Time", y = "Adjusted close") 
+```
+
+```{r}
+# Simple monthly rate return 2009 - 2021
+close_m_2009 <- kgh_m_2009$Zamkniecie
+rate_of_return_m_2009_s <- rep(0, 155)
+for(i in 1:155){
+  rate_of_return_m_2009_s[i] = 100 * (close_m_2009[i + 1] - close_m_2009[i])/close_m_2009[i]
+}
+# Logarithmic monthly rate return 2009 - 2021
+close_m_2009 <- kgh_m_2009$Zamkniecie
+rate_of_return_m_2009_l <- rep(0, 155)
+for(i in 1:155){
+  rate_of_return_m_2009_l[i] = 100 * log(close_m_2009[i + 1] / close_m_2009[i])
+}
+```
+
+
+## Wykresy obu typów stóp zwrotu oraz wykres różnicy między stopą prostą i logarytmiczną
+### Prosta dzienna stopa zwrotu z lat 2020 - 2021
+```{r}
+data1 <- data.frame(
+  day = as.Date(kgh_d_2020$Data[-1]),
+  value = rate_of_return_d_2020_s
+)
+
+ggplot(data = data1, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Daily returns on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Logarytmiczna dzienna stopa zwrotu z lat 2020 - 2021
+```{r}
+data2 <- data.frame(
+  day = as.Date(kgh_d_2020$Data[-1]),
+  value = rate_of_return_d_2020_l
+)
+
+ggplot(data = data2, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Daily returns on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Różnica między dzienna stopą prostą i logarytmiczną z lat 2020 - 2021
+```{r}
+data3 <- data.frame(
+  day = as.Date(kgh_d_2020$Data[-1]),
+  value = rate_of_return_d_2020_s - rate_of_return_d_2020_l
+)
+
+ggplot(data = data3, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("The difference between a simple and logarithmic daily rate on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Prosta tygodniowa stopa zwrotu z lat 2020 - 2021
+```{r}
+data4 <- data.frame(
+  day = as.Date(kgh_w_2020$Data[-1]),
+  value = rate_of_return_w_2020_s
+)
+
+ggplot(data = data4, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Weekly returns on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+
+### Logarytmiczna tygodniowa stopa zwrotu z lat 2020 - 2021
+
+```{r}
+data5 <- data.frame(
+  day = as.Date(kgh_w_2020$Data[-1]),
+  value = rate_of_return_w_2020_l
+)
+
+ggplot(data = data5, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Weekly returns on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Różnica między tygodniowa stopą prostą i logarytmiczną z lat 2020 - 2021
+```{r}
+data6 <- data.frame(
+  day = as.Date(kgh_w_2020$Data[-1]),
+  value = rate_of_return_w_2020_s - rate_of_return_w_2020_l
+)
+
+ggplot(data = data6, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("The difference between a simple and logarithmic weekly rate on KGHM (2020 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Prosta miesieczna stopa zwrotu z lat 2009 - 2021
+
+```{r}
+data7 <- data.frame(
+  day = as.Date(kgh_m_2009$Data[-1]),
+  value = rate_of_return_m_2009_s
+)
+
+ggplot(data = data7, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Monthly returns on KGHM (2009 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return") 
+```
+
+### Logarytmiczna miesieczna stopa zwrotu z lat 2009 - 2021
+
+```{r}
+data8 <- data.frame(
+  day = as.Date(kgh_m_2009$Data[-1]),
+  value = rate_of_return_m_2009_l
+)
+
+ggplot(data = data8, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("Monthly returns on KGHM (2009 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return")
+```
+
+### Różnica między miesieczna stopą prostą i logarytmiczną z lat 2009 - 2021
+
+```{r}
+data9 <- data.frame(
+  day = as.Date(kgh_m_2009$Data[-1]),
+  value = rate_of_return_m_2009_s - rate_of_return_m_2009_l
+)
+
+ggplot(data = data9, aes(x = day, y = value)) + 
+  geom_line(color = "blue", size = 1) +
+  geom_point(color="red") +
+  ggtitle("The difference between a simple and logarithmic monthly rate on KGHM (2009 - 2021)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(x = "time", y = "return")
+
+```
+**Interpretacja**
+
+Zaprezentowane wykresy różnic dwóch rodzajów zwrotów wskazują, że logarytmiczne stopy zwrotu są zawsze mniejsze od prostych stóp zwrotu.
+
+# Zadanie 2
+## Shapiro-Wilk test
+```{r}
+# Daily logarithmic rates of return
+shapiro.test(rate_of_return_d_2012_l)
+
+shapiro.test(rate_of_return_d_2020_l)
+
+# Weekly logarithmic rates of return
+shapiro.test(rate_of_return_w_2012_l)
+
+shapiro.test(rate_of_return_w_2020_l)
+
+# Monthly logarithmic rates of return
+shapiro.test(rate_of_return_m_2009_l)
+
+```
+**Interpretacja**
+
+Badanie normalności rozkładu logarytmicznych stóp zwrotu przeprowadzane jest w teście Shapiro-Wilka przy poziomie istotności 0.05. Hipotezą zerową jest normalność sprawdzanego rozkładu zmiennej.
+Wartość p-value w pierwszym teście wynosi 8.006e-05 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2012-2013 nie jest normalny.
+Wartość p-value w drugim teście wynosi 6.695e-09 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2020-2021 nie jest normalny.
+Wartość p-value w pierwszym teście wynosi 2.272e-06 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2012-2013 nie jest normalny.
+Wartość p-value w pierwszym teście wynosi 0.0001342 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2020-2021 nie jest normalny.
+Wartość p-value w pierwszym teście wynosi 0.3585 i jest większa od alfy, co oznacza nie odrzucenie hipotezy zerowej. Rozkład miesięcznej stopy zwrotu z lat 2009-2021 jest normalny.
+
+## Anderson-Darling test
+```{r}
+library(nortest)
+
+# Daily logarithmic rates of return
+ad.test(rate_of_return_d_2012_l)
+
+ad.test(rate_of_return_d_2020_l)
+
+# Weekly logarithmic rates of return
+ad.test(rate_of_return_w_2012_l)
+
+ad.test(rate_of_return_w_2020_l)
+
+# Monthly logarithmic rates of return
+ad.test(rate_of_return_m_2009_l)
+```
+**Interpretacja**
+
+Badanie normalności rozkładu logarytmicznych stóp zwrotu przeprowadzane jest w teście Andersona-Darlinga przy poziomie istotności 0.05. Hipotezą zerową jest normalność sprawdzanego rozkładu zmiennej. 
+Wartość p-value w pierwszym teście wynosi 0.004606 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2012-2013 nie jest normlany.
+Wartość p-value w drugim teście wynosi 2971e-07 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2020-2021 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 0.007075 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2012-2013 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 0.01286 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2020-2021 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 0.1414 i jest większa od alfy, co oznacza nie odrzucenie hipotezy zerowej. Rozkład miesięcznej stopy zwrotu z lat 2009-2021 jest normlany.
+
+## Jarque-Bera test
+```{r}
+library(tseries)
+library(DescTools)
+# Daily logarithmic rates of return
+jarque.bera.test(rate_of_return_d_2012_l)
+
+jarque.bera.test(rate_of_return_d_2020_l)
+
+# Weekly logarithmic rates of return
+JarqueBeraTest(rate_of_return_w_2020_l, robust = TRUE, method = c("chisq", "mc"), N = 0, na.rm = FALSE)
+
+jarque.bera.test(rate_of_return_w_2020_l)
+
+# Monthly logarithmic rates of return
+jarque.bera.test(rate_of_return_m_2009_l)
+```
+**Interpretacja**
+
+Badanie normalności rozkładu logarytmicznych stóp zwrotu przeprowadzane jest w teście Jarque-Bera przy poziomie istotności 0.05. Hipotezą zerową jest normalność sprawdzanego rozkładu zmiennej. 
+Wartość p-value w pierwszym teście wynosi 1.777e-11i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2012-2013 nie jest normlany.
+Wartość p-value w drugim teście wynosi 2,2e-16 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład dziennej stopy zwrotu z lat 2020-2021 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 2,2e-16 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2012-2013 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 4,718e-14 i jest mniejsza od alfy, co oznacza odrzucenie hipotezy zerowej. Rozkład tygodniowej stopy zwrotu z lat 2020-2021 nie jest normlany.
+Wartość p-value w pierwszym teście wynosi 0.6505 i jest większa od alfy, co oznacza nie odrzucenie hipotezy zerowej. Rozkład miesięcznej stopy zwrotu z lat 2009-2021 jest normlany.
+
+**Zaprezentowane wyniki pokazują, że dzienne oraz tygodniowe logatrytmiczne stopy zwrotu nie mają rozkładu normalnego. Miesięczne stopy zwrotu sa normalnie rozlozone**
+
+# Zadanie 3
+
+```{r}
+data0 <- as.data.frame(kgh_d_2009) 
+close_d_2009 <- rev(data0$Ostatnio)
+close_d_2009 <- as.double(factor(close_d_2009))
+rate_of_return_d_2009_l <- rep(0, 3040)
+for(i in 1:3040){
+  rate_of_return_d_2009_l[i] = 100 * log(close_d_2009[i + 1]/close_d_2009[i])
+}
+
+m = mean(rate_of_return_d_2009_l)
+s = sd(rate_of_return_d_2009_l)
+
+rate_of_return_d_2009_1sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < m && rate_of_return_d_2009_l[i] > (m - s) | rate_of_return_d_2009_l[i] > m && rate_of_return_d_2009_l[i] < (m + s)){
+    rate_of_return_d_2009_1sd <- append(rate_of_return_d_2009_1sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+plot(density(rate_of_return_d_2009_1sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) < 1 SD")
+curve(dnorm(x, mean(rate_of_return_d_2009_1sd),sd(rate_of_return_d_2009_1sd)),add=TRUE,col='red',lwd=3)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal'),col=c('blue','red'))
+```
+
+```{r}
+rate_of_return_d_2009_1_2sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < (m - s) && rate_of_return_d_2009_l[i] > (m - 2*s) | rate_of_return_d_2009_l[i] > (m+ s) && rate_of_return_d_2009_l[i] < (m + 2*s)){
+    rate_of_return_d_2009_1_2sd <- append(rate_of_return_d_2009_1_2sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+plot(density(rate_of_return_d_2009_1_2sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) 1-2 SD")
+curve(dnorm(x, mean(rate_of_return_d_2009_1_2sd),sd(rate_of_return_d_2009_1_2sd)),add=TRUE,col='red',lwd=3)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal'),col=c('blue','red'))
+```
+
+```{r}
+rate_of_return_d_2009_2_3sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < (m - 2*s) && rate_of_return_d_2009_l[i] > (m - 3*s) | rate_of_return_d_2009_l[i] > (m + 2*s) && rate_of_return_d_2009_l[i] < (m + 3*s)){
+    rate_of_return_d_2009_2_3sd <- append(rate_of_return_d_2009_2_3sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+plot(density(rate_of_return_d_2009_2_3sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) 2-3 SD")
+curve(dnorm(x, mean(rate_of_return_d_2009_2_3sd),sd(rate_of_return_d_2009_2_3sd)),add=TRUE,col='red',lwd=3)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal'),col=c('blue','red'))
+```
+
+```{r}
+rate_of_return_d_2009_3_4sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < (m - 3*s) && rate_of_return_d_2009_l[i] > (m - 4*s) | rate_of_return_d_2009_l[i] > (m + 3*s) && rate_of_return_d_2009_l[i] < (m + 4*s)){
+    rate_of_return_d_2009_2_3sd <- append(rate_of_return_d_2009_2_3sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+#plot(density(rate_of_return_d_2009_3_4sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) 3-4 SD")
+#curve(dnorm(x, mean(rate_of_return_d_2009_3_4sd),sd(rate_of_return_d_2009_3_4sd)),add=TRUE,col='red',lwd=3)
+#legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       #c('empirical','normal'),col=c('blue','red'))
+```
+
+W tym przypadku wizualizacja nie jest mozliwa ze zwgledu na fakt, że tylko jeden punkt spelnia kruterium 3-4 SD.
+
+```{r}
+rate_of_return_d_2009_4_5sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < (m - 4*s) && rate_of_return_d_2009_l[i] > (m - 5*s) | rate_of_return_d_2009_l[i] > (m+ 4*s) && rate_of_return_d_2009_l[i] < (m + 5*s)){
+    rate_of_return_d_2009_4_5sd <- append(rate_of_return_d_2009_4_5sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+plot(density(rate_of_return_d_2009_4_5sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) 4-5 SD")
+curve(dnorm(x, mean(rate_of_return_d_2009_4_5sd),sd(rate_of_return_d_2009_4_5sd)),add=TRUE,col='red',lwd=3)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal'),col=c('blue','red'))
+```
+
+```{r}
+rate_of_return_d_2009_5sd <- c()
+for(i in 1:3040){
+  if(rate_of_return_d_2009_l[i] < (m - 5*s) | rate_of_return_d_2009_l[i] > (m + 5*s)){
+    rate_of_return_d_2009_5sd <- append(rate_of_return_d_2009_5sd, rate_of_return_d_2009_l[i])
+  }
+}
+
+plot(density(rate_of_return_d_2009_5sd),col='blue',lwd=4, main = "Daily returns on KGHM (2009 - 2021) > 5 SD")
+curve(dnorm(x, mean(rate_of_return_d_2009_5sd),sd(rate_of_return_d_2009_5sd)),add=TRUE,col='red',lwd=3)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal'),col=c('blue','red'))
+```
+
+**Interpretacja**
+
+Zaprezentowane wykresy pokazują, że w przypadku wartości stóp zwrotu oddalonych o wiecej niż 5 odchyleń standardowych od średniej, można mówić o symetrycznych wzrostach i spadkach cen. Dzieje się tak, ponieważ rozkład normalny (dla zwrotów prostych) jest symetryczny. Rozkład log-normalny (logarytmicznych zwrotów) nie jest. Jest lekko przekrzywiony, przy czym dążąc ku nieskończonosci zbliza sie do zera, więc dla dużych wartości stóp zwrotu ta symetria może już występować.
+
+# Zadanie 4
+
+```{r}
+library(stabledist)
+plot(density(rate_of_return_d_2009_l),col='blue',lwd=3,main='Distribution of (2009-2021) daily returns on KGHM', xlim = c(-100, 100), ylim = c(0, 0.12), xlab = "return")
+curve(dnorm(x, mean(rate_of_return_d_2009_l),sd(rate_of_return_d_2009_l)),add=TRUE,col='red',lwd=3) 
+curve(dt(x, df = 3),add=TRUE,col='green',lwd=3)
+curve(dlogis(x),add=TRUE,col='orange',lwd=3)
+curve(dstable(x, alpha=1.2, beta = .8, gamma = 3, delta = 2), -100, 100, col="purple", lwd=3,add=TRUE)
+legend("topright",bg='white',bty="n",cex=1,lty=1,lwd=c(4,3),
+       c('empirical','normal','t-Student','logistic distribution','alpha-stable'),col=c('blue','red','green','orange','purple'))
+```
+
+**Interpretacja**
+
+Analizując wykres można zauważyć, że najlepiej do rozkładu stóp zwrotu pasowalby rozkład alfa-stabilny.
+
