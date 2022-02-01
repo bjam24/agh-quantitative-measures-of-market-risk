@@ -1,2 +1,2 @@
-# Risk Management in Finance
+# Risk Management
 Under construction
