@@ -1,2 +1,6 @@
 # Risk Management
-Under construction
+Var calculation methods:
+- Historical
+- Weighted historical
+- EWMA
+- GARCH
