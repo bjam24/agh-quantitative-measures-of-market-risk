@@ -16,7 +16,7 @@ Backtesting methods:
 
 Correlation monitoring
 
-Var calculation for portfolio
+VaR calculation for portfolio
 
 ## Data source
 - Yahoo Finance https://finance.yahoo.com/
