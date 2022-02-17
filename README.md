@@ -4,7 +4,7 @@ Rate of return:
 - laogarithmic
 - simple
 
-Var and ES calculation methods:
+VaR and ES calculation methods:
 - Historical
 - Weighted historical
 - EWMA
