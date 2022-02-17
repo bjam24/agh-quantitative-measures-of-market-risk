@@ -1,7 +1,7 @@
 # Risk Management
 ## Topics
 Rate of return:
-- laogarithmic
+- logarithmic
 - simple
 
 VaR and ES calculation methods:
