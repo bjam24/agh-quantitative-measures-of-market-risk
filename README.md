@@ -21,3 +21,5 @@ VaR calculation for portfolio
 ## Data source
 - Yahoo Finance https://finance.yahoo.com/
 - Stooq https://stooq.pl/
+
+# Credit and operational risk modeling
