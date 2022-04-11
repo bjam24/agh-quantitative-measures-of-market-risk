@@ -22,4 +22,4 @@ VaR calculation for portfolio
 - Yahoo Finance https://finance.yahoo.com/
 - Stooq https://stooq.pl/
 
-# Credit and operational risk modeling
+# Credit Risk Modeling
