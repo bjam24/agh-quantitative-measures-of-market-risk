@@ -1,4 +1,7 @@
-# Risk Management
+# Quantitative measures of market risk
+## Description
+This project was made for the Quantitive measures of market risk  course at the AGH UST in 2021/2022.
+
 ## Topics
 Rate of return:
 - logarithmic
@@ -17,6 +20,9 @@ Backtesting methods:
 Correlation monitoring
 
 VaR calculation for portfolio
+## Technology stack
+- R programming language (obligatory)
+- Jupyter Notebook
 
 ## Data source
 - Yahoo Finance https://finance.yahoo.com/
