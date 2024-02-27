@@ -1,8 +1,9 @@
 # Quantitative measures of market risk
 ## Description
 This project was made for the Quantitive measures of market risk  course at the AGH UST in 2021/2022.
-
 ## Topics
+*Analysis of Features Affecting Rate of Return*
+
 Rate of return:
 - logarithmic
 - simple
