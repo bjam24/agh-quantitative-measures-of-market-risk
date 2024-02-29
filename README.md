@@ -15,6 +15,7 @@ This project was made for the Quantitive measures of market risk  course at the 
 - company rating
 
 **Review of Value at Risk estimation methods**
+
 a) VaR and ES calculation methods:
 - Historical
 - Weighted historical
