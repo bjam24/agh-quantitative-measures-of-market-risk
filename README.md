@@ -40,6 +40,10 @@ b) Backtesting methods:
 - Correlation monitoring
 - VaR calculation for portfolio (EWMA and GARCH)
 
+<p float="left">
+<img src="images/correlation.jpg" width="400"/>
+</p>
+
 ## Technology stack
 - R programming language (obligatory)
 - Jupyter Notebook
