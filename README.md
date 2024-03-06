@@ -1,6 +1,7 @@
 # Quantitative measures of market risk
 ## Description
-This project was made for the Quantitive measures of market risk  course at the AGH UST in 2021/2022.
+This project was made for the Quantitive measures of market risk course at the AGH UST in 2021/2022.
+All provided code is result of my work after hours, when I was solving given tasks (topics).
 
 ## Topics
 **Analysis of Features Affecting Rate of Return**
