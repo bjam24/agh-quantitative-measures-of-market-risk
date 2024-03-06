@@ -28,6 +28,10 @@ a) VaR and ES calculation methods:
 - EWMA
 - GARCH
 
+<p float="left">
+<img src="images/garch.jpg" width="400"/>
+</p>
+
 b) Backtesting methods:
 - Christoffersen test
 - Kupiec test
