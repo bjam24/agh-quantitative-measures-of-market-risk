@@ -13,7 +13,7 @@ All provided code is result of my work after hours, when I was solving given tas
 - Distribution of returns
 
 <div>
-<img src="images/log_simp_return.jpg" width="500"/>
+<img src="images/dif_log_simp_return.jpg" width="500"/>
 </div>
 
 **Credit risk reduction models**
