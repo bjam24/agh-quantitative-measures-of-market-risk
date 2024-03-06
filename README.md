@@ -13,8 +13,8 @@ All provided code is result of my work after hours, when I was solving given tas
 - Distribution of returns
 
 <p float="left">
-<img src="images/dif_log_simp_return.jpg" width="500"/>
-<img src="images/dist_of_returns.jpg" width="500"/>
+<img src="images/dif_log_simp_return.jpg" width="400"/>
+<img src="images/dist_of_returns.jpg" width="400"/>
 </p>
 
 **Credit risk reduction models**
