@@ -14,7 +14,7 @@ All provided code is result of my work after hours, when I was solving given tas
 
 <p float="left">
 <img src="images/dif_log_simp_return.jpg" width="500"/>
-<img src="images/dif_log_simp_return.jpg" width="500"/>
+<img src="images/dis_of_returnsn.jpg" width="500"/>
 </p>
 
 **Credit risk reduction models**
