@@ -12,9 +12,10 @@ All provided code is result of my work after hours, when I was solving given tas
 - Jarque-Bera test
 - Distribution of returns
 
-<div>
+<p float="left">
 <img src="images/dif_log_simp_return.jpg" width="500"/>
-</div>
+<img src="images/dif_log_simp_return.jpg" width="500"/>
+</p>
 
 **Credit risk reduction models**
 - company rating
