@@ -22,6 +22,7 @@ a) VaR and ES calculation methods:
 - Weighted historical
 - EWMA
 - GARCH
+
 b) Backtesting methods:
 - Christoffersen test
 - Kupiec test
